@@ -103,6 +103,26 @@ router.post('/update/:id', function(req, res) {
       console.log(err);
   })
 })
+//****fix this to grab new snippet data****//
+router.post("/create", function(req, res) {
+  Snippet.create({
+    title: req.body.title,
+    snippet: req.body.snippet,
+    notes: req.body.notes,
+    language: req.body.language,
+    tags: req.body.tags
+  })
+  .then(function(data) {
+    console.log("THIS IS /CREATE .THEN");
+    res.redirect("/user/:id");
+  })
+  .catch(function(err) {
+    console.log("THIS IS /CREATE .CATCH");
+    console.log(err);
+    res.redirect("/");
+  });
+});
+
 //** Logout of user account **//
 router.get("/logout", function(req, res) {
   req.session.destroy(function(err) {

@@ -1,17 +1,19 @@
-<div>
+<div id="logged_in">
   {{#loggedIn}}
     <h4>User Logged In: {{username}}</h4>
   {{/loggedIn}}
 </div>
-{{#users}}
-  <a class="content" href="/user/{{_id}}">
-    <div class="eachUser">
-      <table class="userDetails">
-        <tr>
-          <th>Name</th>
-          <td>{{name}}</td>
-        </tr>
-      </table>
-    </div>
-  </a>
-{{/users}}
+<div class="public_container">
+  {{#users}}
+    <a class="content" href="/user/{{_id}}">
+      <div class="eachUser">
+        <table class="userDetails">
+          <tr>
+            <th>Name:</th>
+            <td>{{  name}}</td>
+          </tr>
+        </table>
+      </div>
+    </a>
+  {{/users}}
+</div>
