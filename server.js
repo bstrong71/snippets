@@ -9,7 +9,7 @@ const passport        = require('passport');
 const LocalStrategy   = require('passport-local').Strategy;
 const session         = require('express-session');
 const flash           = require('express-flash-messages');
-const User            = require('./models/snippet');
+const User            = require('./models/user');
 
 const app             = express();
 
@@ -58,7 +58,7 @@ app.use(function (req, res, next) {
 })
 
 app.use(session({
-    secret: 'keyboard cat',
+    secret: 'smellyCat',
     resave: false,
     saveUninitialized: false,
     store: new(require('express-sessions'))({

@@ -1,0 +1,25 @@
+<div>
+  {{#loggedIn}}
+    <h4>User Logged In: {{username}}</h4>
+  {{/loggedIn}}
+</div>
+{{#users}}
+  <a class="content" href="/user/{{_id}}">
+    <div class="eachUser">
+      <table class="userDetails">
+        <tr>
+          <th>Name</th>
+          <td>{{name}}</td>
+        </tr>
+        <tr>
+          <th>Username</th>
+          <td>{{username}}</td>
+        </tr>
+        <tr>
+          <th>Email</th>
+          <td>{{email}}</td>
+        </tr>
+      </table>
+    </div>
+  </a>
+{{/users}}

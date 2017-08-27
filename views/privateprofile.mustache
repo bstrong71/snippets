@@ -1,0 +1,34 @@
+{{#userP}}
+<div class="">
+  <h2>Your Profile</h2>
+</div>
+<div class="privateUser">
+  <table class="privateDetails">
+    <tr>
+      <th>Name</th>
+      <td>{{name}}</td>
+    </tr>
+    <tr>
+      <th>Username</th>
+      <td>{{username}}</td>
+    </tr>
+    <tr>
+      <th>Email</th>
+      <td>{{email}}</td>
+    </tr>
+  </table>
+</div>
+<div class="wrapper">
+    <div>
+      <h3>Edit Your Profile</h3>
+    </div>
+    <div class="userProf">
+      <form class="" action="/update/{{_id}}" method="post">
+        <input type="text" name="name" value="{{name}}" placeholder="Name">
+        <input type="text" name="username" value="{{username}}" placeholder="Username">
+        <input type="email" name="email" value="{{email}}" placeholder="Email">
+        <button type="submit" name="button">Save Changes</button>
+      </form>
+    </div>
+  </div>
+{{/userP}}

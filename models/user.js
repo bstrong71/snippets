@@ -8,6 +8,8 @@ mongoose.connect('mongodb://localhost:27017/snippetData');
 const userSchema = new mongoose.Schema({
   username: { type: String, unique: true, lowercase: true, required: true },
   passwordHash: { type: String, required: true },
+  name: {type: String, required: true},
+  email: String,
 });
 
 userSchema.virtual('password')
@@ -38,6 +40,5 @@ userSchema.statics.authenticate = function(username, password, done) {
 };
 
 const User = mongoose.model("User", userSchema);
-
 
 module.exports = User;
