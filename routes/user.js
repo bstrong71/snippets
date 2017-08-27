@@ -1,5 +1,6 @@
 const express   = require("express");
 const User      = require("../models/user");
+const Snippet   = require("../models/snippet");
 const router    = express.Router();
 const mongoose  = require("mongoose");
 const passport  = require("passport");
@@ -8,7 +9,7 @@ mongoose.connect("mongodb://localhost:27017/snippetData");
 
 let data = []; //gives access to data in routes because global
 
-//requires login to access user profile page//
+//** Middleware to require login on specific pages **//
 const requireLogin = function (req, res, next) {
   if (req.user) {
     next()
@@ -16,7 +17,7 @@ const requireLogin = function (req, res, next) {
     res.redirect('/login');
   }
 };
-
+//** Middleware to verify if user is logged in **//
 const login = function (req, res, next) {
   if (req.user) {
     res.redirect("/")
@@ -25,7 +26,7 @@ const login = function (req, res, next) {
   }
 };
 
-//***require login at directory page***//
+//*** requires login to access public page ***//
 router.get('/', requireLogin, function(req, res) {
   User.find({}).sort("name")
     .then(function(users) {
@@ -69,8 +70,7 @@ router.post("/signup", function(req, res) {
   });
 });
 
-
-//***View User Profile Page***//
+//** Allows logged-in user to view own private profile page **//
 router.get('/user/:id', function (req, res) {
   let id = req.params.id;
   if(req.user.id === id) {
@@ -85,7 +85,7 @@ router.get('/user/:id', function (req, res) {
     res.render('profile', userP);
   }
 });
-
+//** Allows user to update own profile **//
 router.post('/update/:id', function(req, res) {
   let id = req.params.id;
   let profileUpdate = {};
@@ -95,7 +95,6 @@ router.post('/update/:id', function(req, res) {
   if(req.body.email){
     profileUpdate.email = req.body.email;
   };
-
   User.update({_id: id}, {$set: profileUpdate})
     .then(function(data) {
     res.redirect("/");
@@ -104,7 +103,7 @@ router.post('/update/:id', function(req, res) {
       console.log(err);
   })
 })
-
+//** Logout of user account **//
 router.get("/logout", function(req, res) {
   req.session.destroy(function(err) {
     console.log(err);

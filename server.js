@@ -10,6 +10,7 @@ const LocalStrategy   = require('passport-local').Strategy;
 const session         = require('express-session');
 const flash           = require('express-flash-messages');
 const User            = require('./models/user');
+const Snippet         = require('./models/snippet');
 
 const app             = express();
 
