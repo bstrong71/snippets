@@ -7,52 +7,42 @@ const passport  = require("passport");
 
 mongoose.connect("mongodb://localhost:27017/snippetData");
 
-let data = []; //gives access to data in routes because global
 
 //** Middleware to require login on specific pages **//
 const requireLogin = function (req, res, next) {
   if (req.user) {
     next()
   } else {
-    res.redirect('/login');
+    res.redirect("/login");
   }
 };
 //** Middleware to verify if user is logged in **//
 const login = function (req, res, next) {
   if (req.user) {
-    res.redirect("/")
+    res.redirect("/user")
   } else {
     next();
   }
 };
 
-//*** requires login to access public page ***//
-router.get('/', requireLogin, function(req, res) {
-  User.find({}).sort("name")
-    .then(function(users) {
-      let loggedIn = req.user;
-      data = users;
-      res.render('public', {users: data, loggedIn: loggedIn});
-    })
-    .catch(function(err) {
-      console.log(err);
-    })
+router.get("/", login, function(req, res) {
+  res.render("signin")
 });
 
 router.get('/login', login, function(req, res) {
-  res.render('login', {
+  res.render('signin', {
     messages: res.locals.getMessages()
   });
 })
 
 router.post('/login', passport.authenticate('local', {
-    successRedirect: '/',
+    successRedirect: '/user',
     failureRedirect: '/login',
     failureFlash: true
 }));
 
 router.get("/signup", function(req, res) {
-  res.render("signup");
+  res.render("signin");
 });
 
 router.post("/signup", function(req, res) {
@@ -62,50 +52,30 @@ router.post("/signup", function(req, res) {
     password: req.body.password,
     email: req.body.email
   }).then(function(data) {
-    res.redirect("/");
+    res.redirect("/user");
   })
   .catch(function(err) {
     console.log(err);
-    res.redirect("/signup");
+    res.redirect("/");
   });
 });
 
-//** Allows logged-in user to view own private profile page **//
-router.get('/user/:id', function (req, res) {
-  let id = req.params.id;
-  if(req.user.id === id) {
-    let userP = data.find(function(user) {
-      return user.id == id;
-    });
-    res.render('privateprofile', {userP: userP});
-  } else {
-    let userP = data.find(function(user) {
-      return user.id == id;
-    });
-    res.render('profile', userP);
-  }
-});
-//** Allows user to update own profile **//
-router.post('/update/:id', function(req, res) {
-  let id = req.params.id;
-  let profileUpdate = {};
-  if(req.body.name){
-    profileUpdate.name = req.body.name;
-  };
-  if(req.body.email){
-    profileUpdate.email = req.body.email;
-  };
-  User.update({_id: id}, {$set: profileUpdate})
-    .then(function(data) {
-    res.redirect("/");
-    })
-    .catch(function(err) {
-      console.log(err);
+//** Allows logged-in user to view UserPage **//
+router.get("/user", requireLogin, function (req, res) {
+  Snippet.find({})
+  .then(function(data) {
+    res.render("theUserPage", {snippet: data})
   })
-})
+});
+
+router.get("/create", requireLogin, function (req, res) {
+  res.render("create")
+});
+
 //****fix this to grab new snippet data****//
 router.post("/create", function(req, res) {
   Snippet.create({
+    username: req.body.username,
     title: req.body.title,
     snippet: req.body.snippet,
     notes: req.body.notes,
@@ -113,8 +83,8 @@ router.post("/create", function(req, res) {
     tags: req.body.tags
   })
   .then(function(data) {
-    console.log("THIS IS /CREATE .THEN");
-    res.redirect("/user/:id");
+    console.log("THIS IS /CREATE USERNAME .THEN");
+    res.redirect("/user");
   })
   .catch(function(err) {
     console.log("THIS IS /CREATE .CATCH");
@@ -125,9 +95,7 @@ router.post("/create", function(req, res) {
 
 //** Logout of user account **//
 router.get("/logout", function(req, res) {
-  req.session.destroy(function(err) {
-    console.log(err);
-  });
+  req.logout();
   res.redirect("/");
 });
 

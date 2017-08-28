@@ -5,6 +5,7 @@ const Schema        = mongoose.Schema;
 mongoose.connect('mongodb://localhost:27017/snippetData');
 
 const snippetSchema = new mongoose.Schema({
+  username: {type: String, lowercase: true, required: true},
   title: {type: String, required: true},
   snippet: {type: String, required: true},
   notes: String,

@@ -10,6 +10,7 @@ const userSchema = new mongoose.Schema({
   passwordHash: { type: String, required: true },
   name: {type: String, required: true},
   email: String,
+
 });
 
 userSchema.virtual('password')
