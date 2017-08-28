@@ -66,7 +66,22 @@ router.get("/user", requireLogin, function(req, res) {
     res.render("theUserPage", {snippet: data})
   })
   .catch(function(err) {
+    res.redirect('/');
+  })
+});
 
+router.get("/snippet/:viewSnip", requireLogin, function(req, res) {
+  if (req.params.viewSnip === 'main.css') {
+    res.render("theSnippet", {data: req.session.data})
+    req.session.data = null;
+  }
+  Snippet.find({_id: req.params.viewSnip})
+  .then(function(singleSnippet) {
+    req.session.data = singleSnippet;
+    res.render("theSnippet", {data: singleSnippet})
+  })
+  .catch(function(err) {
+    res.redirect("/");
   })
 });
 
@@ -76,7 +91,7 @@ router.get("/language/:searchLang", requireLogin, function(req, res) {
     res.render("theUserPage", {snippet: data})
   })
   .catch(function(err) {
-
+    res.redirect("/");
   })
 });
 
@@ -86,7 +101,7 @@ router.get("/tags/:searchTags", requireLogin, function(req, res) {
     res.render("theUserPage", {snippet: data})
   })
   .catch(function(err) {
-
+    res.redirect("/");
   })
 });
 
