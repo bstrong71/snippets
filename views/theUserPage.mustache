@@ -1,11 +1,17 @@
+<head>
+  <meta charset="utf-8">
+  <title>Code Snippet Repo</title>
+  <link rel="stylesheet" href="../main.css">
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,600,700|Ubuntu:300,400,500" rel="stylesheet">
+</head>
 {{#snippet}}
   <div class="eachSnippet">
     <p>Username: {{username}}</p>
     <p>Title: {{title}}</p>
     <textarea name="code" rows="12" cols="60">{{snippet}}</textarea>
     <p>Notes: {{notes}}</p>
-    <p>Language: {{language}}</p>
-    <p>Tags: {{tags}}</p>
+    <p>Language: <a href="/language/{{language}}">{{language}}</a></p>
+    <p>Tags: <a href="/tags/{{tags}}">{{tags}}</a></p>
   </div>
 {{/snippet}}
 <a class="createaSnip" href="/create">Create a Snippet</a>

@@ -55,16 +55,38 @@ router.post("/signup", function(req, res) {
     res.redirect("/user");
   })
   .catch(function(err) {
-    console.log(err);
     res.redirect("/");
   });
 });
 
 //** Allows logged-in user to view UserPage **//
-router.get("/user", requireLogin, function (req, res) {
+router.get("/user", requireLogin, function(req, res) {
   Snippet.find({})
   .then(function(data) {
     res.render("theUserPage", {snippet: data})
+  })
+  .catch(function(err) {
+
+  })
+});
+
+router.get("/language/:searchLang", requireLogin, function(req, res) {
+  Snippet.find({language: req.params.searchLang})
+  .then(function(data) {
+    res.render("theUserPage", {snippet: data})
+  })
+  .catch(function(err) {
+
+  })
+});
+
+router.get("/tags/:searchTags", requireLogin, function(req, res) {
+  Snippet.find({tags: req.params.searchTags})
+  .then(function(data) {
+    res.render("theUserPage", {snippet: data})
+  })
+  .catch(function(err) {
+
   })
 });
 
