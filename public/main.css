@@ -7,6 +7,7 @@ font-family: 'Ubuntu', sans-serif;*/
 }
 
 body{
+  background-color: #F0F5F8;
   font-family: 'Open Sans', sans-serif;
 }
 
@@ -19,12 +20,13 @@ header{
 }
 
 h1{
-   margin-right: 335px;
+   margin-right: 275px;
 }
 
 header a{
    color: black;
-   font-size: 20px;
+   font-size: 22px;
+   font-weight: bold;
    margin: 0 35px;
    text-decoration: none;
 }
@@ -89,18 +91,46 @@ main{
   margin-top: 10px;
 }
 
+.container{
+  display: flex;
+  flex-wrap: wrap;
+  flex: 1 1 25%;
+  justify-content: space-between;
+}
+
+.section{
+  border: 1px solid black;
+  margin-bottom: 15px;
+  padding: 15px;
+}
+
 .createaSnip{
   color: black;
-  font-size: 20px;
+  font-size: 35px;
   font-weight: bold;
-  margin: 20px 0;
+  margin: 30px 0;
+  text-align: center;
+  text-transform: uppercase;
   text-decoration: none;
   width: 100%;
 }
 
-.eachSnippet{
-  border: 1px solid black;
-  margin: 10px 5px 10px 0;
+.wrapper{
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+.singleSnippet{
+  width: 50%;
+}
+
+.singleSnippet p{
+  font-size: 18px;
+  margin: 10px;
+}
+
+textarea{
+  font-size: 14px;
   padding: 10px;
-  width: 30%;
 }

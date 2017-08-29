@@ -4,17 +4,18 @@
   <link rel="stylesheet" href="../main.css">
   <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,600,700|Ubuntu:300,400,500" rel="stylesheet">
 </head>
-{{#snippet}}
-  <div class="section">
-    <p>Username: {{username}}</p>
-    <p>Title: {{title}}</p>
-    <textarea name="code" rows="12" cols="60">{{snippet}}</textarea>
-    <p>Notes: {{notes}}</p>
-    <p>Language: <a href="/language/{{language}}">{{language}}</a></p>
-    <p>Tags: <a href="/tags/{{tags}}">{{tags}}</a></p>
-  </div>
-  <div class="viewSnip">
-    <a href="/snippet/{{_id}}">View this Snippet</a>
-  </div>
-{{/snippet}}
+<div class="container">
+  {{#snippet}}
+    <div class="section">
+      <p>Username: {{username}}</p>
+      <p>Title: {{title}}</p>
+      <textarea name="code" rows="12" cols="60">{{snippet}}</textarea>
+      <p>Notes: {{notes}}</p>
+      <p>Language: <a href="/language/{{language}}">{{language}}</a></p>
+      <p>Tags: <a href="/tags/{{tags}}">{{tags}}</a></p>
+      <a href="/snippet/{{_id}}">View this Snippet</a>
+    </div>
+  {{/snippet}}
+</div>
+
 <a class="createaSnip" href="/create">Create a Snippet</a>
