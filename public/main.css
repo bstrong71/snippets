@@ -19,39 +19,74 @@ header{
 }
 
 h1{
-   margin-right: 725px;
+   margin-right: 335px;
 }
 
-a{
+header a{
    color: black;
    font-size: 20px;
-   margin: 0 15px;
+   margin: 0 35px;
    text-decoration: none;
 }
 
 main{
   display: flex;
   flex-wrap: wrap;
+  height: 400px;
   margin: 50px;
 }
 
-.public_container{
-  display: flex;
+.loginSection{
+  margin-left: 300px;
+  margin-right: 50px;
 }
 
-#logged_in{
-  width: 100%;
-}
-
-#logged_in h4{
+.loginSection h2{
   padding: 15px;
 }
 
-.content{
-  border: 1px solid gray;
-  height: 400px;
-  padding: 10px;
-  width: 300px;
+#loginForm{
+  display: flex;
+  flex-direction: column;
+  padding: 15px;
+}
+
+#loginForm input{
+  padding: 8px;
+  margin: 10px 0;
+  width: 200px;
+}
+
+#loginForm button{
+  padding: 8px;
+  margin-top: 10px;
+}
+
+.signupSection{
+  border-left: 1px solid black;
+  margin-left: 50px;
+  padding-left: 35px;
+}
+
+.signupSection h2{
+  padding: 15px;
+}
+
+#signupForm{
+  display: flex;
+  flex-direction: column;
+  padding: 15px;
+}
+
+#signupForm input{
+  padding: 8px;
+  margin: 10px 0;
+  width: 200px;
+}
+
+#signupForm button{
+  padding: 8px;
+  margin-top: 10px;
 }
 
 .createaSnip{
