@@ -35,12 +35,8 @@ main{
   display: flex;
   flex-wrap: wrap;
   height: 400px;
+  justify-content: center;
   margin: 50px;
-}
-
-.loginSection{
-  margin-left: 300px;
-  margin-right: 50px;
 }
 
 .loginSection h2{
@@ -132,5 +128,28 @@ main{
 
 textarea{
   font-size: 14px;
+  padding: 10px;
+}
+
+.snipArea{
+  width: 100%;
+}
+
+.snipArea div{
+  text-align: center;
+}
+
+.createSnippet{
+  width: 50%;
+}
+
+.snipForm{
+  display: flex;
+  flex-direction: column;
+}
+
+.snipForm input, textarea{
+  font-size: 18px;
+  margin: 10px;
   padding: 10px;
 }
